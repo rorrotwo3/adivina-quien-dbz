@@ -1,75 +1,42 @@
-# React + TypeScript + Vite
+# Adivina quién · Dragon Ball
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Juego de Adivina Quién contra la CPU, con 24 personajes de Dragon Ball.
 
-Currently, two official plugins are available:
+**Jugar:** [https://adivina-quien-dbz-rho.vercel.app](https://adivina-quien-dbz-rho.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Cómo se juega
 
-## React Compiler
+1. Elige tu carta secreta. La CPU sortea la suya del mismo mazo.
+2. En tu turno haces una pregunta de sí o no. Las cartas que no encajan se giran y muestran el reverso.
+3. La CPU pregunta. Respondes con **Sí**, **No**, **Probablemente sí**, **Probablemente no** o **No lo sé**.
+4. Cuando estés seguro, acusa. Si fallas, pierdes. Si aciertas, ganas.
+5. La CPU también puede acusar en su turno. Si acierta, gana ella.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Cómo funciona
 
-## Expanding the ESLint configuration
+Cada personaje tiene atributos de sí o no (saiyajin, calvo, fusión, y el resto del mazo). El tablero del jugador descarta de golpe: si la respuesta es sí o no, las cartas que no coinciden se bajan.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+La CPU no tira una pregunta al azar. Elige la que más parte por la mitad a los sospechosos que aún tiene. **Sí** y **No** descartan. **Probablemente sí** y **Probablemente no** no borran a nadie: bajan la probabilidad del lado que no cuadra. **No lo sé** deja el mazo igual. Acusa cuando le queda una carta, o cuando una concentra la mayor parte de la probabilidad.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Requisitos
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js `^20.19.0` o `>=22.12.0` (lo pide Vite 8)
+- npm
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Instalación
 
+```bash
+git clone https://github.com/rorrotwo3/adivina-quien-dbz.git
+cd adivina-quien-dbz
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Abre la URL que imprime Vite (por defecto `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Para generar la carpeta de producción:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
+npm run preview
 ```
