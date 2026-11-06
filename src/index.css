@@ -1,0 +1,90 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Saiyan Sans';
+  src: url('/fonts/Saiyan-Sans.ttf') format('truetype');
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-saiyan: 'Saiyan Sans', 'Outfit', sans-serif;
+  --color-ink: #1c1917;
+  --color-ember: #c46a2a;
+  --color-paper: #f4efe6;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #1c1917;
+  color: #f4efe6;
+  font-family: var(--font-sans);
+}
+
+/* shortcut: el archivo trae mucho aire entre letras; si se cambia la fuente, quitar el tracking. */
+.font-saiyan {
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  padding-top: 0.12em;
+  -webkit-text-stroke: 1px #1c1917;
+  paint-order: stroke fill;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
+
+.btn {
+  border-radius: 2px;
+  border: 2px solid #1c1917;
+  background: #f4efe6;
+  color: #1c1917;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn:hover {
+  background: #e7c9a2;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.btn:focus-visible {
+  outline: 2px solid #c46a2a;
+  outline-offset: 2px;
+}
